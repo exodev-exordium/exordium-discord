@@ -1,11 +1,12 @@
 const Discord = require('discord.js');
+const client = new Discord.Client();
 
 module.exports = {
     name: "ban",
     category: "moderation",
     description: "Bans a mentioned user from the server.",
 
-    run: (client, message, args) => {
+    run: async (client, message, args) => {
         if (!message.member.hasPermission("BAN_MEMBERS")){
             let embed = new Discord.MessageEmbed()
                 .setColor("#3f51b5")
@@ -25,7 +26,7 @@ module.exports = {
             return message.channel.send(embed);
         }
 
-        if (kuser = message.author){
+        if (kuser == message.author.id){
             let embed = new Discord.MessageEmbed()
             .setColor("#3f51b5")
             .setTitle("Error")
@@ -34,8 +35,7 @@ module.exports = {
             return message.channel.send(embed);
         }
 
-        let kreason = args.join(" ").slice(22);
-        if (kuser.hasPermission("KICK_MEMBERS")){
+        if (kuser.hasPermission("BAN_MEMBERS")){
             let embed = new Discord.MessageEmbed()
             .setColor("#3f51b5")
             .setTitle("Error")
@@ -44,29 +44,31 @@ module.exports = {
             return message.channel.send(embed);
         }
 
+        let kreason = args.join(" ").slice(22);
+        if (!kreason) kreason = "No reason provided."
+
         let kickembed = new Discord.MessageEmbed()
             .setDescription(`Ban Report`)
             .setAuthor(kuser.user.tag)
             .addField("Banned By:", `<@${message.author.id}>`)
             .addField("Reason:", kreason)
-            .setTimestamp
-            .setColor("#3f51b5");
+            .setTimestamp()
+            .setColor("#3f51b5")
+
         const kickChannel = client.channels.cache.get('741422260681703490')
         if (!kickChannel) return message.channel.send("Cannot find logs channel.");
-        kickChannel.send(kickembed);
+        kickChannel.send(kickembed)
 
         let dmembed = new Discord.MessageEmbed()
-            .setDescription(`Ban Report`)
-            .setAuthor(kuser.user.tag)
-            .addField("**You were banned from EXORDIUM's Discord.**")
-            .addField("Banned By:", `<@${message.author.id}>`)
-            .addField("Reason:", kreason)
-            .setTimestamp
-            .setColor("#3f51b5");
-            kuser.send(dmembed)
-
+        .setTitle(`Ban Report`)
+        .setDescription("**You were banned from EXORDIUM.**")
+        .addField("Banned By:", `<@${message.author.id}>`)
+        .addField("Reason:", kreason)
+        .setTimestamp()
+        .setColor("#3f51b5")
+        .setThumbnail(`https://avatars0.githubusercontent.com/u/56140699?s=600&v=4`)
+        await kuser.send(dmembed)
         message.guild.member(kuser).ban(kreason);
-        return;
 
     }
 }

@@ -6,7 +6,7 @@ module.exports = {
     category: "moderation",
     description: "Kicks a mentioned user from the server.",
 
-    run: (client, message, args) => {
+    run: async (client, message, args) => {
         if (!message.member.hasPermission("KICK_MEMBERS")){
             let embed = new Discord.MessageEmbed()
                 .setColor("#3f51b5")
@@ -35,8 +35,6 @@ module.exports = {
             return message.channel.send(embed);
         }
 
-        let kreason = args.join(" ").slice(22);
-        if (!kreason) kreason = "No reason provided."
         if (kuser.hasPermission("KICK_MEMBERS")){
             let embed = new Discord.MessageEmbed()
             .setColor("#3f51b5")
@@ -46,29 +44,31 @@ module.exports = {
             return message.channel.send(embed);
         }
 
+        let kreason = args.join(" ").slice(22);
+        if (!kreason) kreason = "No reason provided."
+
         let kickembed = new Discord.MessageEmbed()
             .setDescription(`Kick Report`)
             .setAuthor(kuser.user.tag)
             .addField("Kicked By:", `<@${message.author.id}>`)
             .addField("Reason:", kreason)
             .setTimestamp()
-            .setColor("#3f51b5");
+            .setColor("#3f51b5")
 
         const kickChannel = client.channels.cache.get('741422260681703490')
         if (!kickChannel) return message.channel.send("Cannot find logs channel.");
         kickChannel.send(kickembed)
-        let dmembed = new Discord.MessageEmbed()
-            .setDescription(`Kick Report`)
-            .setAuthor(kuser.user.tag)
-            .addField("**You were kicked from EXORDIUM's Discord.**")
-            .addField("Kicked By:", `<@${message.author.id}>`)
-            .addField("Reason:", kreason)
-            .setTimestamp()
-            .setColor("#3f51b5");
-            kuser.send(dmembed)
 
+        let dmembed = new Discord.MessageEmbed()
+        .setTitle(`Kick Report`)
+        .setDescription("**You were kicked from EXORDIUM.**")
+        .addField("Kicked By:", `<@${message.author.id}>`)
+        .addField("Reason:", kreason)
+        .setTimestamp()
+        .setColor("#3f51b5")
+        .setThumbnail(`https://avatars0.githubusercontent.com/u/56140699?s=600&v=4`)
+        await kuser.send(dmembed)
         message.guild.member(kuser).kick(kreason);
-        return;
 
     }
 }

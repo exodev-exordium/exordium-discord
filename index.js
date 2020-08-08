@@ -14,9 +14,9 @@ client.aliases = new Collection();
 });
 
 client.once('ready', () => {
-	console.log(`Bot running. Made by @heyrift.`);
-	client.user.setActivity(`over Exordium's Discord. | +help`, {
-		type: `WATCHING`
+	console.log(`Bot ready. Made by @heyrift.`);
+	client.user.setActivity(`with Exordium | +help`, {
+		type: `PLAYING`,
 	});
 })
 

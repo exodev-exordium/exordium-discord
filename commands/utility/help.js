@@ -16,8 +16,8 @@ module.exports = {
       .addField("\\🗡️ Moderation", `\`\`\`\n+ban        | Bans a mentioned user.
 +kick       | Kicks a mentioned user.
 +warn       | Warns a mentioned user.
-+purge      | Purges messages.
-+restart    | Restarts the bot.\n\`\`\`
++warns      | Checks a users warn count.
++purge      | Purges messages.\n\`\`\`
 `)    
       .setFooter(`Bot made by @heyrift.`)
     message.author.send(help);

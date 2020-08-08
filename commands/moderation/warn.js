@@ -37,6 +37,7 @@ module.exports = {
         } 
 
         let reason = args.join(" ").slice(22);
+        if(!reason) reason = "No reason provided."
 
         if (!warns[wUser.id]) warns[wUser.id] = {
             warns: 0
@@ -47,8 +48,8 @@ module.exports = {
         });
         let warnEmbed = new Discord.MessageEmbed()
             .setTitle("Warn Report")
-            .setAuthor(message.author.tag)
             .setColor("#3f51b5")
+            .addField("Person warned:", wUser.user.tag)
             .addField("Warned By:", `<@${message.author.id}>`)
             .addField("Warned In:", message.channel)
             .addField("Warn Count:", warns[wUser.id].warns)
@@ -56,18 +57,17 @@ module.exports = {
             .setTimestamp()
         const warnchannel = client.channels.cache.get('741422260681703490')
         if (!warnchannel) return message.channel.send(`Could not find logs channel.`);
-        warnchannel.message.send(warnEmbed);
+        warnchannel.send(warnEmbed);
 
         let dmembed = new Discord.MessageEmbed()
             .setTitle("Warn Report")
-            .setAuthor(message.author.tag)
+            .setThumbnail(`https://avatars0.githubusercontent.com/u/56140699?s=600&v=4`)
+            .setDescription("**You were warned in EXORDIUM.**")
             .setColor("#3f51b5")
-            .addField("**You were warned in EXORDIUM's discord.**")
             .addField("Warned By:", `<@${message.author.id}>`)
             .addField("Warn Count:", warns[wUser.id].warns)
             .addField("Reason:", reason)
             .setTimestamp()
-        if (!warnchannel) return message.channel.send(`Could not find logs channel.`);
-        warnchannel.message.send(warnEmbed);
+        wUser.send(dmembed)
     }
 }         
