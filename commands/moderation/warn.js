@@ -55,7 +55,7 @@ module.exports = {
             .addField("Warn Count:", warns[wUser.id].warns)
             .addField("Reason:", reason)
             .setTimestamp()
-        const warnchannel = client.channels.cache.get('741422260681703490')
+        const warnchannel = client.channels.cache.get('741414700251873303')
         if (!warnchannel) return message.channel.send(`Could not find logs channel.`);
         warnchannel.send(warnEmbed);
 

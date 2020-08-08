@@ -55,7 +55,7 @@ module.exports = {
             .setTimestamp()
             .setColor("#3f51b5")
 
-        const kickChannel = client.channels.cache.get('741422260681703490')
+        const kickChannel = client.channels.cache.get('741414700251873303')
         if (!kickChannel) return message.channel.send("Cannot find logs channel.");
         kickChannel.send(kickembed)
 
