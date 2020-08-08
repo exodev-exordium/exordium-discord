@@ -11,7 +11,8 @@ module.exports = {
       .setTimestamp()
       .addField("\\🔧 Utility", `\`\`\`\n+help       | Sends you this message.
 +serverinfo | Fetches information on the Discord server.
-+userinfo   | Fetches information on a mentioned user.\n\`\`\`
++userinfo   | Fetches information on a mentioned user.
++reactions  | Sets up reaction roles. Requires Administrator.\n\`\`\`
 `)
       .addField("\\🗡️ Moderation", `\`\`\`\n+ban        | Bans a mentioned user.
 +kick       | Kicks a mentioned user.
