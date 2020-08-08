@@ -51,7 +51,7 @@ module.exports = {
             .addField("Reason:", kreason)
             .setTimestamp
             .setColor("#3f51b5");
-        let kickChannel = "741414700251873303"
+        const kickChannel = client.channels.cache.get('741422260681703490')
         if (!kickChannel) return message.channel.send("Cannot find logs channel.");
         kickChannel.send(kickembed);
 

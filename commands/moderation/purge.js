@@ -41,20 +41,8 @@ module.exports = {
                 return message.channel.send(embed);
                 
             }
-
-            let warnEmbed = new Discord.MessageEmbed()
-            .setTitle("Purge Report")
-            .setColor("#3f51b5")
-            .addField("Purged By:", `<@${message.author.id}>`)
-            .addField("Purged In:", message.channel)
-            .addField("Amount Purged:", num)
-            .setTimestamp()
-        let warnchannel = "741414700251873303"
-        if (!warnchannel) return message.channel.send(`Could not find logs channel.`);
-        warnchannel.send(warnEmbed);
-
+            
         } catch (err) {
-            message.channel.send('Error.\n You should never see this.\n' + err).catch()
         }
     }
 }

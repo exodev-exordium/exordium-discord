@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const client = new Discord.Client();
 
 module.exports = {
     name: "kick",
@@ -25,7 +26,7 @@ module.exports = {
             return message.channel.send(embed);
         }
 
-        if (kuser = message.author){
+        if (kuser == message.author.id){
             let embed = new Discord.MessageEmbed()
             .setColor("#3f51b5")
             .setTitle("Error")
@@ -35,6 +36,7 @@ module.exports = {
         }
 
         let kreason = args.join(" ").slice(22);
+        if (!kreason) kreason = "No reason provided."
         if (kuser.hasPermission("KICK_MEMBERS")){
             let embed = new Discord.MessageEmbed()
             .setColor("#3f51b5")
@@ -49,19 +51,19 @@ module.exports = {
             .setAuthor(kuser.user.tag)
             .addField("Kicked By:", `<@${message.author.id}>`)
             .addField("Reason:", kreason)
-            .setTimestamp
+            .setTimestamp()
             .setColor("#3f51b5");
-        let kickChannel = "741414700251873303"
-        if (!kickChannel) return message.channel.send("Cannot find logs channel.");
-        kickChannel.send(kickembed);
 
+        const kickChannel = client.channels.cache.get('741422260681703490')
+        if (!kickChannel) return message.channel.send("Cannot find logs channel.");
+        kickChannel.send(kickembed)
         let dmembed = new Discord.MessageEmbed()
             .setDescription(`Kick Report`)
             .setAuthor(kuser.user.tag)
             .addField("**You were kicked from EXORDIUM's Discord.**")
             .addField("Kicked By:", `<@${message.author.id}>`)
             .addField("Reason:", kreason)
-            .setTimestamp
+            .setTimestamp()
             .setColor("#3f51b5");
             kuser.send(dmembed)
 
