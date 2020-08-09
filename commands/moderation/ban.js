@@ -1,5 +1,9 @@
+// dotenv requirement for token data
+const dotenv = require('dotenv');
+dotenv.config();
+
+// discord requirement
 const Discord = require('discord.js');
-const client = new Discord.Client();
 
 module.exports = {
     name: "ban",
@@ -9,7 +13,7 @@ module.exports = {
     run: async (client, message, args) => {
         if (!message.member.hasPermission("BAN_MEMBERS")){
             let embed = new Discord.MessageEmbed()
-                .setColor("#3f51b5")
+                .setColor(process.env.DISCORD_COLOR_DANGER)
                 .setTitle("Error")
                 .setDescription("You don't have permission to ban people.")
                 .setTimestamp()
@@ -19,7 +23,7 @@ module.exports = {
         let kuser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
         if (!kuser){
             let embed = new Discord.MessageEmbed()
-            .setColor("#3f51b5")
+            .setColor(process.env.DISCORD_COLOR_DANGER)
             .setTitle("Error")
             .setDescription("Invalid user.")
             .setTimestamp()
@@ -28,7 +32,7 @@ module.exports = {
 
         if (kuser == message.author.id){
             let embed = new Discord.MessageEmbed()
-            .setColor("#3f51b5")
+            .setColor(process.env.DISCORD_COLOR_DANGER)
             .setTitle("Error")
             .setDescription("You can't ban yourself.")
             .setTimestamp()
@@ -37,7 +41,7 @@ module.exports = {
 
         if (kuser.hasPermission("BAN_MEMBERS")){
             let embed = new Discord.MessageEmbed()
-            .setColor("#3f51b5")
+            .setColor(process.env.DISCORD_COLOR_DANGER)
             .setTitle("Error")
             .setDescription("You can't ban a staff member.")
             .setTimestamp()
@@ -53,20 +57,20 @@ module.exports = {
             .addField("Banned By:", `<@${message.author.id}>`)
             .addField("Reason:", kreason)
             .setTimestamp()
-            .setColor("#3f51b5")
+            .setColor(process.env.DISCORD_COLOR_SUCCESS)
 
         const kickChannel = client.channels.cache.get('741414700251873303')
         if (!kickChannel) return message.channel.send("Cannot find logs channel.");
         kickChannel.send(kickembed)
 
         let dmembed = new Discord.MessageEmbed()
-        .setTitle(`Ban Report`)
-        .setDescription("**You were banned from EXORDIUM.**")
-        .addField("Banned By:", `<@${message.author.id}>`)
-        .addField("Reason:", kreason)
-        .setTimestamp()
-        .setColor("#3f51b5")
-        .setThumbnail(`https://avatars0.githubusercontent.com/u/56140699?s=600&v=4`)
+            .setTitle(`Ban Report`)
+            .setDescription("**You were banned from EXORDIUM.**")
+            .addField("Banned By:", `<@${message.author.id}>`)
+            .addField("Reason:", kreason)
+            .setTimestamp()
+            .setColor(process.env.DISCORD_COLOR_DANGER)
+            .setThumbnail(`https://avatars0.githubusercontent.com/u/56140699?s=600&v=4`)
         await kuser.send(dmembed)
         message.guild.member(kuser).ban(kreason);
 
