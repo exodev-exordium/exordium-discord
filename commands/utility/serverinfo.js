@@ -1,3 +1,8 @@
+// dotenv requirement for token data
+const dotenv = require('dotenv');
+dotenv.config();
+
+// discord requirement
 const Discord = require('discord.js');
 
 module.exports = {
@@ -27,7 +32,7 @@ module.exports = {
         if (message.guild.region === 'us-west') region = ':flag_us: US West'
 
         const embed = new Discord.MessageEmbed()
-            .setColor("#3f51b5")
+            .setColor(process.env.DISCORD_COLOR_PRIMARY)
             .setThumbnail(Icon)
             .setFooter(`ID: ${message.guild.id}`,
                 'https://cdn.discordapp.com/avatars/492871769485475840/6164d0068b8e76e497af9b0e1746f671.png?size=2048')

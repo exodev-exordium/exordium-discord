@@ -1,3 +1,8 @@
+// dotenv requirement for token data
+const dotenv = require('dotenv');
+dotenv.config();
+
+// discord requirement
 const Discord = require('discord.js');
 
 module.exports = {
@@ -14,7 +19,7 @@ module.exports = {
                 .addField('Account Creation Date: ', `${user.user.createdAt}`, true)
                 .addField('Current Game: ', `${user.user.presence.game || 'none'}`, true)
                 .setThumbnail(user.user.avatarURL)
-                .setColor("#3f51b5")
+                .setColor(process.env.DISCORD_COLOR_PRIMARY)
                 .setTimestamp()
                 message.channel.send(embed)
                 

@@ -1,3 +1,8 @@
+// dotenv requirement for token data
+const dotenv = require('dotenv');
+dotenv.config();
+
+// discord requirement
 const Discord = require('discord.js');
 
 module.exports = {
@@ -7,14 +12,16 @@ module.exports = {
 
   run: async (client, message, args) => {
     const help = new Discord.MessageEmbed()
-      .setColor("#3f51b5")
+      .setColor(process.env.DISCORD_COLOR_PRIMARY)
       .setTimestamp()
-      .addField("\\🔧 Utility", `\`\`\`\n+help       | Sends you this message.
+      .addField("\\🔧 Utility", `\`\`\`\n
++help       | Sends you this message.
 +serverinfo | Fetches information on the Discord server.
 +userinfo   | Fetches information on a mentioned user.
 +reactions  | Sets up reaction roles. Requires Administrator.\n\`\`\`
 `)
-      .addField("\\🗡️ Moderation", `\`\`\`\n+ban        | Bans a mentioned user.
+      .addField("\\🗡️ Moderation", `\`\`\`\n
++ban        | Bans a mentioned user.
 +kick       | Kicks a mentioned user.
 +warn       | Warns a mentioned user.
 +warns      | Checks a users warn count.
