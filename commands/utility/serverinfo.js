@@ -9,6 +9,7 @@ module.exports = {
     name: "server",
     category: "utility",
     description: "Fetches information on the server.",
+    
     run: async (client, message, args) => {
         const Icon = message.guild.iconURL === null
             ? 'https://discordapp.com/assets/6debd47ed13483642cf09e832ed0bc1b.png' : message.guild.iconURL
