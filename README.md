@@ -3,7 +3,7 @@
 In order to use the bot you'll need to make a `.env` file in the main repo directory. Format would look something like this;
 
 > `exordium-discord` `/` `.env`
-```
+```sh
 # General
 DISCORD_TOKEN=
 DISCORD_PREFIX=+
