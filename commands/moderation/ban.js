@@ -10,7 +10,7 @@ module.exports = {
     category: "moderation",
     description: "Bans a mentioned user from the server.",
 
-    run: async (client, message, args) => {
+    run: (client, message, args) => {
         if (!message.member.hasPermission("BAN_MEMBERS")){
             let embed = new Discord.MessageEmbed()
                 .setColor(process.env.DISCORD_COLOR_DANGER)
@@ -57,7 +57,7 @@ module.exports = {
             .addField("Banned By:", `<@${message.author.id}>`)
             .addField("Reason:", kreason)
             .setTimestamp()
-            .setColor(process.env.DISCORD_COLOR_SUCCESS)
+            .setColor(process.env.DISCORD_COLOR_DANGER)
 
         const kickChannel = client.channels.cache.get('741414700251873303')
         if (!kickChannel) return message.channel.send("Cannot find logs channel.");

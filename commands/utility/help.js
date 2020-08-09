@@ -27,7 +27,7 @@ module.exports = {
 +warns      | Checks a users warn count.
 +purge      | Purges messages.\n\`\`\`
 `)    
-      .setFooter(`Bot made by @heyrift.`)
+      .setFooter(`Bot made by Rift and the Exordium Development team.`)
     message.author.send(help);
     message.react("📬")
   }

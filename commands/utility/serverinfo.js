@@ -6,13 +6,13 @@ dotenv.config();
 const Discord = require('discord.js');
 
 module.exports = {
-    name: "server",
+    name: "serverinfo",
     category: "utility",
     description: "Fetches information on the server.",
     
     run: async (client, message, args) => {
         const Icon = message.guild.iconURL === null
-            ? 'https://discordapp.com/assets/6debd47ed13483642cf09e832ed0bc1b.png' : message.guild.iconURL
+        ? 'https://discordapp.com/assets/6debd47ed13483642cf09e832ed0bc1b.png' : message.guild.iconURL()
         const verified = message.guild.verified !== true ? 'Not verified.' : 'Verified.'
         const afk_channel = message.guild.afkChannel === null ? 'N/A' : message.guild.afkChannel
 
@@ -24,7 +24,7 @@ module.exports = {
         if (message.guild.region === 'india') region = ':flag_in: India'
         if (message.guild.region === 'japan') region = ':flag_jp: Japan'
         if (message.guild.region === 'russia') region = ':flag_ru: Russia'
-        if (message.guild.region === 'singapore') region = ':flag_sg: Singapore'
+        if (message.guild.region === 'singapore') region = ':flag_si: Singapore'
         if (message.guild.region === 'south-africa') region = ':flag_za: South Africa'
         if (message.guild.region === 'sydney') region = ':flag_au: Australia'
         if (message.guild.region === 'us-central') region = ':flag_us: US Central'
@@ -35,14 +35,19 @@ module.exports = {
         const embed = new Discord.MessageEmbed()
             .setColor(process.env.DISCORD_COLOR_PRIMARY)
             .setThumbnail(Icon)
-            .setFooter(`ID: ${message.guild.id}`,
-                'https://cdn.discordapp.com/avatars/492871769485475840/6164d0068b8e76e497af9b0e1746f671.png?size=2048')
+            .setFooter(`ID: ${message.guild.id}`)
             .setTitle(`${message.guild.name}`)
-            .addField('Owner: ', `${message.guild.owner}`, true)
-            .addField('Member Count: ', `${message.guild.memberCount}`, true)
-            .addField('Server Verification: ', `${verified}`)
-            .addField('Server Creation Date: ', `${message.guild.createdAt}`, true)
-            .addField('Region: ', `${region}`, true)
+            .setDescription(`**Server Owner:** 
+${message.guild.owner}
+
+**Member Count:**
+ ${message.guild.memberCount}
+
+ **Region:** 
+ ${region}
+
+ **Server Creation Date:** 
+ ${message.guild.createdAt}`)
             .setTimestamp()
 
         message.channel.send(embed)

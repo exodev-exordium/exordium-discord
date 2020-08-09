@@ -14,7 +14,7 @@ module.exports = {
     category: "moderation",
     description: "Warns a user.",
 
-    run: async (client, message, args) => {
+    run: (client, message, args) => {
         if (!message.member.hasPermission("MANAGE_MESSAGES")){
 
             let embed = new Discord.MessageEmbed()
@@ -63,7 +63,7 @@ module.exports = {
 
         let warnEmbed = new Discord.MessageEmbed()
             .setTitle("Warn Report")
-            .setColor(process.env.DISCORD_COLOR_SUCCESS)
+            .setColor(DISCORD_COLOR_INFO)
             .addField("Person warned:", wUser.user.tag)
             .addField("Warned By:", `<@${message.author.id}>`)
             .addField("Warned In:", message.channel)
@@ -79,7 +79,7 @@ module.exports = {
             .setTitle("Warn Report")
             .setThumbnail(`https://avatars0.githubusercontent.com/u/56140699?s=600&v=4`)
             .setDescription("**You were warned in EXORDIUM.**")
-            .setColor(process.env.DISCORD_COLOR_DANGER)
+            .setColor(process.env.DISCORD_COLOR_WARNING)
             .addField("Warned By:", `<@${message.author.id}>`)
             .addField("Warn Count:", warns[wUser.id].warns)
             .addField("Reason:", reason)

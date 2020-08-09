@@ -22,6 +22,6 @@ DISCORD_STAFF_ROLE=583705191388413957
 DISCORD_LOG=741414700251873303
 
 # Credits
-DISCORD_CREDIT_FOOTER=Bot created by @heyrift and the Exordium Development Team
+DISCORD_CREDIT_FOOTER=Bot created by @heyrift and the Exordium Development Team.
 
 ```
