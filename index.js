@@ -17,10 +17,21 @@ client.aliases = new Discord.Collection();
 });
 
 client.once('ready', () => {
-	console.log(`Bot ready. Made by @heyrift.`);
-	client.user.setActivity(`with Exordium | +help`, {
-		type: `PLAYING`,
+	console.log(`Bot: Ready! Made by @heyrift.`);
+
+	// Set the client user's presence
+	client.user.setPresence({ 
+		activity: { 
+			name: `Exordium / ${process.env.DISCORD_PREFIX}help`, 
+			type: 'WATCHING' 
+		}, status: 'idle' 
+	}).then(() => {
+		console.log;
+	}).catch(error => {
+		console.error(error);
 	});
+
+	console.log(`Bot: Hosting ${client.users.cache.size} users, in ${client.channels.cache.size} channels of ${client.guilds.cache.size} guilds.`);
 });
 
 client.on('message', async message => {
