@@ -71,7 +71,8 @@ module.exports = {
             .setTimestamp()
             .setColor(process.env.DISCORD_COLOR_DANGER)
             .setThumbnail(`https://avatars0.githubusercontent.com/u/56140699?s=600&v=4`)
-        await kuser.send(dmembed)
+
+        kuser.send(dmembed)
         message.guild.member(kuser).kick(kreason);
 
     }

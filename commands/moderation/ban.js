@@ -86,7 +86,7 @@ module.exports = {
             .setColor(process.env.DISCORD_COLOR_DANGER)
             .setThumbnail(userToBan.user.avatarURL({size: 512}));
             
-        await userToBan.send(dmembed)
+        userToBan.send(dmembed)
         message.guild.member(userToBan).ban(banReason);
 
     }
